@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Webpage</title>
+</head>
+<body>
+  <div>
+    <label for="messageInput">Type and Submit:</label>
+    <input type="text" id="messageInput" />
+    <button onclick="submitData()">Submit</button>
+  </div>
+
+  <script>
+    function submitData() {
+      const content = document.getElementById('messageInput').value;
+
+      fetch('/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `content=${content}`,
+      })
+      .then(response => response.text())
+      .then(data => alert(data))
+      .catch(error => console.error(error));
+    }
+  </script>
+</body>
+</html>
